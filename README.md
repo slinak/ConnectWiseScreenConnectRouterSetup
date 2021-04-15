@@ -32,3 +32,5 @@ Web requests that come in on either 80 or 443 are forwarded to the correct port 
    <rule schemeExpression="relay" actionType="forwardPayload" actionData="relay://localhost:8041/" />
   </rules>
  </screenconnect.routing>
+
+If you only want to use 443 then that's the only port on which the listenUri should be configured and the actions should be updated accordingly.
