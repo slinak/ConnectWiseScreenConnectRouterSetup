@@ -1,0 +1,2 @@
+Copy-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Services\ScreenConnect Relay" -Destination "HKLM:\SYSTEM\CurrentControlSet\Services\ScreenConnect Router" 
+Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Services\ScreenConnect Router" -Name "DisplayName" -Value "ScreenConnect Router"

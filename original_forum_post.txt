@@ -1,0 +1,33 @@
+In 5.0 we've added a hidden "ScreenConnect Router" service. To "install" it, simply go to registry HKLM/System/CurrentControlSet/Services and copy the "ScreenConnect Relay" key to a key "ScreenConnect Router". Then it'll appear as a start-able service (reboot required?).
+
+It's configurable in the web.config:
+
+<configuration>
+ <configSections>
+  <section name="screenconnect.routing" type="Elsinore.ScreenConnect.RoutingConfigurationHandler, Elsinore.ScreenConnect.Server" />
+ </configSections>
+ <screenconnect.routing>
+  <listenUris>
+   <listenUri>tcp://+:80/</listenUri>
+   <listenUri>tcp://+:443/</listenUri>
+  </listenUris>
+  <rules>
+   <rule schemeExpression="http" actionType="issueRedirect" actionData="https://$HOST/" />
+   <rule schemeExpression="ssl" actionType="forwardPayload" actionData="https://localhost:8043/" />
+   <rule schemeExpression="relay" actionType="forwardPayload" actionData="https://localhost:8041/" />
+  </rules>
+ </screenconnect.routing>
+ <location path="Host.aspx">
+ 
+* The protocol in each listenUri is ignored (tcp is just specified as kind of a dummy value)
+* You can use "schemeExpression", "hostExpression", "portExpression", "pathExpression", and "queryExpression" for filtering... They are all regular expressions
+* You can substitute $SCHEME, $HOST, $PORT, $PATH, and $QUERY into actionData
+* You will see schemes "ssl", "http" and "relay" come through (we don't know that "ssl" is "https")
+* SSL will use SNI to parse the hostname out of the client hello handshake
+* This cannot share port/ips with IIS/HTTP.SYS, but it can forward data to IIS/HTTP.SYS
+* In the case above the ScreenConnect RelayListenUri was relay://+:8041/ and the WebServerRelayListenUri was https://+:8043/
+* You'll need RelayAddressableUri and WebServerAddressableUri entries
+* Your listenUri entries will likely specify distinct IPs so you don't have to bind on all adapters
+* We use this same method for our cloud hosting, but we have dynamic rules ... and we don't do forwardPayload with HTTPS; our web servers bind to the public hostname directly on 443
+
+
