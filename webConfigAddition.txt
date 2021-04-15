@@ -1,6 +1,3 @@
-Add the following block to the web.config file (C:/Program Files (x86)/ScreenConnect/web.config) just below the opening <configuration> block.
-It is likely the values will need to be modified for your individual server configuration.  The payloads should be forwarded to the ports that the WebServerListenUri and RelayListenUri are using.
-
  <configSections>
   <section name="screenconnect.routing" type="ScreenConnect.RoutingConfigurationHandler, ScreenConnect.Server" />
  </configSections>
