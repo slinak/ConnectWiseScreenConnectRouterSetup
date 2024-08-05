@@ -1,5 +1,5 @@
 Web.config Setup Example:
-This example is for a default Control server without HTTPS, the Web server is listening on 8040 and the Relay on 8041.  
+This example is for a default ScreenConnect server without HTTPS, the Web server is listening on 8040 and the Relay on 8041.  
 Web requests that come in on either 80 or 443 are forwarded to the correct port but HTTPS is not applied because the server is not serving those requests.
 Add the following block to the web.config file (C:/Program Files (x86)/ScreenConnect/web.config) just below the opening <configuration> block.
 
