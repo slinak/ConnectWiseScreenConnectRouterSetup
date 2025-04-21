@@ -20,7 +20,7 @@ ForwardPayload
 HttpCallback
 ```
 
-##        ---------Setup Instructions---------
+## Setup Instructions
 1.  To create the new service, copy the ScreenConnect Relay service entry (HKLM:\SYSTEM\CurrentControlSet\Services\ScreenConnect Relay) within the registry and rename it to ScreenConnect Router.
 2.  Reboot the server.
 3.  Add the configuration blocks for the Router service to the web.config file, just below the opening <configuration> block.
