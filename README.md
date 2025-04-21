@@ -7,6 +7,7 @@
 
 ## Overview
 The router is a message brokering service that can be used to direct tcp traffic.  It can listen upon multiple URIs and then execute rules based upon information we know about the connection handshake.
+
 These rules can compare the following parts of a connection with the following format: 
 ```
 scheme://host:port/path/?query
